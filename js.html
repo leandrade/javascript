@@ -1,0 +1,85 @@
+<html>
+
+<head>
+    <title>Teste</title>
+</head>
+
+<body>
+    <span id="listagemFruta">
+
+    </span>
+
+    <button id="criar"> Enviar</button>
+
+    <script>
+
+        // Objetos de exemplo
+        var fruits = ["laranja", "melao", "abacaxi"]; // Foi buscar no servidor
+        var tblPeso = {
+            "pesos": [
+                { "Nome": "Leonardo", "KG": "250" },
+                { "Nome": "Leandro", "KG": "050" }
+            ]
+        };
+
+        // Criar um novo elemento <li> ao clicar no botão
+        function criarElemento() {
+            var nome = "Juliana";
+            var peso = "70";
+            
+            tblPeso.pesos.push({"Nome": nome, "KG": peso});
+            createLi(nome, peso);
+        }
+
+        // Função utilizada para criar esturtura de <ul><li> ao iniciar a pagina
+        function gerarLista(fruit) {
+
+
+            var html = "";
+
+            if (fruits && fruits.length > 0) {
+                html += "<ul>";
+
+                for (var i = 0; i < fruits.length; i++) {
+
+                    html += "<li>" + fruits[i] + "</li>";
+
+                }
+                html += "</ul>";
+            }
+
+            if (tblPeso) {
+                html += "<ul id='pesos'>";
+
+                for (var i = 0; i < tblPeso.pesos.length; i++) {
+
+                    html += "<li>" + tblPeso.pesos[i].Nome + " - " + tblPeso.pesos[i].KG + "</li>";
+
+                }
+
+                html += "</ul>";
+            }
+
+            document.getElementById("listagemFruta").innerHTML = html;
+
+        };
+
+        // Função criada para Adicionar elementos <li> no <ul> existentes
+        function createLi(nome, peso) {
+            var ul = document.getElementById("pesos");
+            var li = document.createElement("li");
+            li.appendChild(document.createTextNode(nome +" - "+ peso));
+            ul.appendChild(li);
+        } 
+
+
+        // É chamado quando os elementos da pagina já estão carregados
+        window.onload = function () {
+            gerarLista();
+            //criarElemento(); 
+            document.getElementById("criar").onclick = criarElemento;
+        };
+    </script>
+</body>
+
+</html>
